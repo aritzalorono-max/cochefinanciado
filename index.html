@@ -738,17 +738,46 @@
     result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  function enviarFormulario(e) {
+  const SUPA_URL = 'https://cgnialhpwpnehiywxuqn.supabase.co';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnbmlhbGhwd3BuZWhpeXd4dXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0MTQ1MzAsImV4cCI6MjA5NTk5MDUzMH0.kKaMfz_5Cpufjt4d26_xFm_CVC4lInLsFI83uaxoX48';
+
+  async function enviarFormulario(e) {
     e.preventDefault();
-    // Simulate form submission
     const btn = e.target.querySelector('.btn-submit');
     btn.textContent = 'Enviando...';
     btn.disabled = true;
 
-    setTimeout(() => {
+    const fd = new FormData(e.target);
+    const data = {
+      nombre:    fd.get('nombre'),
+      apellidos: fd.get('apellidos'),
+      email:     fd.get('email'),
+      telefono:  fd.get('telefono'),
+      entidad:   fd.get('entidad') || null,
+      anio:      fd.get('anio') || null,
+      capital:   fd.get('capital') || null,
+      estado:    fd.get('estado') || null,
+      comentario: fd.get('comentario') || null,
+    };
+
+    try {
+      const res = await fetch(`${SUPA_URL}/rest/v1/cochefinanciado_leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPA_KEY,
+          'Authorization': `Bearer ${SUPA_KEY}`,
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error('Error al enviar');
       document.getElementById('form-content').style.display = 'none';
       document.getElementById('form-success').classList.add('show');
-    }, 1200);
+    } catch (err) {
+      btn.textContent = 'Error al enviar. Inténtalo de nuevo.';
+      btn.disabled = false;
+    }
   }
 
   // Smooth scroll for anchor links
