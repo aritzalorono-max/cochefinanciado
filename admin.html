@@ -18,66 +18,40 @@
     body { font-family: 'Sora', sans-serif; color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; min-height: 100vh; }
 
     /* LOGIN */
-    .login-wrap {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
-    }
-    .login-card {
-      background: var(--white); border: 1px solid var(--line); border-radius: 20px;
-      padding: 48px 40px; width: 100%; max-width: 380px;
-    }
-    .login-logo { font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .login-card { background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 48px 40px; width: 100%; max-width: 380px; }
+    .login-logo { font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
     .login-logo b { color: var(--accent); }
     .login-sub { font-size: .8rem; color: var(--ink-3); margin-bottom: 32px; }
-    .login-card label { font-size: .7rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--ink-3); display: block; margin-bottom: 6px; }
-    .login-card input[type="password"] {
+    .login-card label { font-size: .7rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--ink-3); display: block; margin-bottom: 6px; margin-top: 14px; }
+    .login-card input {
       width: 100%; padding: 11px 14px; border: 1.5px solid var(--line);
       border-radius: 8px; font-family: 'Sora', sans-serif; font-size: .9rem;
-      color: var(--ink); margin-bottom: 16px; transition: border-color .15s;
+      color: var(--ink); transition: border-color .15s;
     }
-    .login-card input[type="password"]:focus { outline: none; border-color: var(--accent); }
+    .login-card input:focus { outline: none; border-color: var(--accent); }
     .login-card input.err { border-color: #e53e3e; }
-    .login-btn {
-      width: 100%; background: var(--ink); color: #fff;
-      font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700;
-      padding: 13px; border: none; border-radius: 10px; cursor: pointer;
-      transition: background .2s;
-    }
+    .login-btn { width: 100%; margin-top: 20px; background: var(--ink); color: #fff; font-family: 'Sora', sans-serif; font-size: .88rem; font-weight: 700; padding: 13px; border: none; border-radius: 10px; cursor: pointer; transition: background .2s; }
     .login-btn:hover { background: var(--accent); }
+    .login-btn:disabled { opacity: .6; cursor: not-allowed; }
     .login-err { font-size: .78rem; color: #c53030; margin-top: 10px; display: none; }
 
     /* ADMIN */
     .admin-wrap { display: none; }
-
-    /* HEADER */
-    .admin-hdr {
-      background: var(--white); border-bottom: 1px solid var(--line);
-      padding: 0 28px; position: sticky; top: 0; z-index: 10;
-    }
-    .admin-hdr-i {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 60px;
-    }
+    .admin-hdr { background: var(--white); border-bottom: 1px solid var(--line); padding: 0 28px; position: sticky; top: 0; z-index: 10; }
+    .admin-hdr-i { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
     .admin-logo { font-size: .95rem; font-weight: 700; color: var(--ink); }
     .admin-logo b { color: var(--accent); }
     .admin-logo span { font-size: .72rem; font-weight: 600; color: var(--ink-3); margin-left: 8px; background: var(--bg); padding: 2px 8px; border-radius: 99px; }
-    .logout-btn {
-      font-size: .78rem; font-weight: 600; color: var(--ink-3);
-      background: none; border: 1px solid var(--line); border-radius: 8px;
-      padding: 7px 14px; cursor: pointer; font-family: 'Sora', sans-serif;
-      transition: color .15s, border-color .15s;
-    }
+    .admin-user { font-size: .78rem; color: var(--ink-3); margin-right: 12px; }
+    .logout-btn { font-size: .78rem; font-weight: 600; color: var(--ink-3); background: none; border: 1px solid var(--line); border-radius: 8px; padding: 7px 14px; cursor: pointer; font-family: 'Sora', sans-serif; transition: color .15s, border-color .15s; }
     .logout-btn:hover { color: var(--ink); border-color: var(--ink); }
 
-    /* BODY */
     .admin-body { max-width: 1200px; margin: 0 auto; padding: 36px 28px; }
 
     /* STATS */
     .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
-    .stat-card {
-      background: var(--white); border: 1px solid var(--line);
-      border-radius: 14px; padding: 22px 24px;
-    }
+    .stat-card { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; }
     .stat-label { font-size: .72rem; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
     .stat-val { font-size: 2rem; font-weight: 800; letter-spacing: -.02em; color: var(--ink); line-height: 1; }
     .stat-val.blue { color: var(--accent); }
@@ -85,68 +59,40 @@
 
     /* TABS */
     .tabs { display: flex; gap: 4px; margin-bottom: 20px; }
-    .tab {
-      padding: 8px 18px; border-radius: 8px; border: 1px solid var(--line);
-      background: var(--white); font-family: 'Sora', sans-serif;
-      font-size: .82rem; font-weight: 600; color: var(--ink-3);
-      cursor: pointer; transition: all .15s;
-    }
+    .tab { padding: 8px 18px; border-radius: 8px; border: 1px solid var(--line); background: var(--white); font-family: 'Sora', sans-serif; font-size: .82rem; font-weight: 600; color: var(--ink-3); cursor: pointer; transition: all .15s; }
     .tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
 
     /* TABLE */
     .table-wrap { background: var(--white); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
-    .table-head {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 20px; border-bottom: 1px solid var(--line);
-    }
+    .table-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--line); }
     .table-head h3 { font-size: .9rem; font-weight: 700; }
-    .search-input {
-      padding: 8px 14px; border: 1px solid var(--line); border-radius: 8px;
-      font-family: 'Sora', sans-serif; font-size: .82rem; color: var(--ink);
-      width: 220px; transition: border-color .15s;
-    }
+    .search-input { padding: 8px 14px; border: 1px solid var(--line); border-radius: 8px; font-family: 'Sora', sans-serif; font-size: .82rem; color: var(--ink); width: 220px; transition: border-color .15s; }
     .search-input:focus { outline: none; border-color: var(--accent); }
     table { width: 100%; border-collapse: collapse; font-size: .82rem; }
-    thead th {
-      text-align: left; padding: 11px 16px;
-      font-size: .68rem; font-weight: 700; letter-spacing: .5px;
-      text-transform: uppercase; color: var(--ink-3);
-      background: var(--bg); border-bottom: 1px solid var(--line);
-    }
+    thead th { text-align: left; padding: 11px 16px; font-size: .68rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--ink-3); background: var(--bg); border-bottom: 1px solid var(--line); }
     tbody tr { border-bottom: 1px solid var(--line); transition: background .15s; cursor: pointer; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: #f0f4ff; }
     td { padding: 13px 16px; color: var(--ink-2); vertical-align: top; }
     td.name { font-weight: 600; color: var(--ink); }
     td.date { color: var(--ink-3); font-size: .76rem; }
-    .badge {
-      display: inline-block; padding: 2px 9px; border-radius: 99px;
-      font-size: .7rem; font-weight: 700;
-    }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: .7rem; font-weight: 700; }
     .badge.lead { background: #eff4ff; color: var(--accent); }
-    .badge.contact { background: #f0f9f1; color: var(--success); }
     .empty { text-align: center; padding: 48px; color: var(--ink-3); font-size: .88rem; }
     .loading { text-align: center; padding: 48px; color: var(--ink-3); font-size: .88rem; }
 
     /* MODAL */
-    .modal-bg {
-      display: none; position: fixed; inset: 0; z-index: 100;
-      background: rgba(0,0,0,.4); backdrop-filter: blur(4px);
-      align-items: center; justify-content: center; padding: 24px;
-    }
+    .modal-bg { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.4); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 24px; }
     .modal-bg.show { display: flex; }
-    .modal {
-      background: var(--white); border-radius: 20px;
-      padding: 36px; width: 100%; max-width: 520px;
-      max-height: 85vh; overflow-y: auto;
-    }
+    .modal { background: var(--white); border-radius: 20px; padding: 36px; width: 100%; max-width: 520px; max-height: 85vh; overflow-y: auto; }
     .modal-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
-    .modal-close { font-size: 1.2rem; cursor: pointer; color: var(--ink-3); background: none; border: none; }
+    .modal-close { font-size: 1.2rem; cursor: pointer; color: var(--ink-3); background: none; border: none; padding: 4px 8px; }
     .modal-row { display: grid; grid-template-columns: 140px 1fr; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--line); align-items: start; }
     .modal-row:last-child { border-bottom: none; }
     .modal-key { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--ink-3); padding-top: 2px; }
     .modal-val { font-size: .88rem; color: var(--ink); word-break: break-word; }
-    .modal-val a { color: var(--accent); }
+    .dl-btn { display: inline-block; background: var(--accent); color: #fff; font-family: 'Sora', sans-serif; font-size: .78rem; font-weight: 700; padding: 7px 14px; border: none; border-radius: 7px; cursor: pointer; transition: background .15s; }
+    .dl-btn:hover { background: #0040e0; }
 
     @media (max-width: 900px) { .stats { grid-template-columns: repeat(2,1fr); } }
     @media (max-width: 580px) { .stats { grid-template-columns: 1fr 1fr; } .search-input { width: 140px; } td { padding: 10px 10px; } }
@@ -159,10 +105,12 @@
   <div class="login-card">
     <div class="login-logo">Coche<b>Financiado</b>.es</div>
     <p class="login-sub">Panel de administración</p>
-    <label for="pwd">Contraseña</label>
-    <input type="password" id="pwd" placeholder="••••••••" onkeydown="if(event.key==='Enter') doLogin()" />
-    <button class="login-btn" onclick="doLogin()">Entrar →</button>
-    <p class="login-err" id="login-err">Contraseña incorrecta.</p>
+    <div id="login-err-msg" class="login-err">Email o contraseña incorrectos.</div>
+    <label for="adm-email">Email</label>
+    <input type="email" id="adm-email" placeholder="admin@cochefinanciado.es" autocomplete="username" />
+    <label for="adm-pwd">Contraseña</label>
+    <input type="password" id="adm-pwd" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()" />
+    <button class="login-btn" id="login-btn" onclick="doLogin()">Entrar →</button>
   </div>
 </div>
 
@@ -171,38 +119,26 @@
   <div class="admin-hdr">
     <div class="admin-hdr-i">
       <div class="admin-logo">Coche<b>Financiado</b>.es <span>Admin</span></div>
-      <button class="logout-btn" onclick="doLogout()">Cerrar sesión</button>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="admin-user" id="admin-user-email"></span>
+        <button class="logout-btn" onclick="doLogout()">Cerrar sesión</button>
+      </div>
     </div>
   </div>
 
   <div class="admin-body">
-    <!-- STATS -->
     <div class="stats">
-      <div class="stat-card">
-        <div class="stat-label">Total leads</div>
-        <div class="stat-val blue" id="s-total">—</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Hoy</div>
-        <div class="stat-val" id="s-today">—</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Esta semana</div>
-        <div class="stat-val" id="s-week">—</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Mensajes contacto</div>
-        <div class="stat-val green" id="s-contact">—</div>
-      </div>
+      <div class="stat-card"><div class="stat-label">Total leads</div><div class="stat-val blue" id="s-total">—</div></div>
+      <div class="stat-card"><div class="stat-label">Hoy</div><div class="stat-val" id="s-today">—</div></div>
+      <div class="stat-card"><div class="stat-label">Esta semana</div><div class="stat-val" id="s-week">—</div></div>
+      <div class="stat-card"><div class="stat-label">Mensajes contacto</div><div class="stat-val green" id="s-contact">—</div></div>
     </div>
 
-    <!-- TABS -->
     <div class="tabs">
       <button class="tab active" onclick="switchTab('leads', this)">Leads reclamación</button>
       <button class="tab" onclick="switchTab('contactos', this)">Mensajes contacto</button>
     </div>
 
-    <!-- TABLE -->
     <div class="table-wrap">
       <div class="table-head">
         <h3 id="table-title">Leads reclamación</h3>
@@ -214,50 +150,84 @@
 </div>
 
 <!-- MODAL -->
-<div class="modal-bg" id="modal-bg" onclick="if(event.target===this) closeModal()">
-  <div class="modal">
+<div class="modal-bg" id="modal-bg">
+  <div class="modal" role="dialog" aria-modal="true">
     <div class="modal-title">
-      Detalle del registro
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <span>Detalle del registro</span>
+      <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">✕</button>
     </div>
     <div id="modal-content"></div>
   </div>
 </div>
 
 <script>
-  const ADMIN_PASS = 'cochefinanciado2025';
   const SB_URL = 'https://cgnialhpwpnehiywxuqn.supabase.co';
-  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnbmlhbGhwd3BuZWhpeXd4dXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0MTQ1MzAsImV4cCI6MjA5NTk5MDUzMH0.kKaMfz_5Cpufjt4d26_xFm_CVC4lInLsFI83uaxoX48';
+  const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnbmlhbGhwd3BuZWhpeXd4dXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0MTQ1MzAsImV4cCI6MjA5NTk5MDUzMH0.kKaMfz_5Cpufjt4d26_xFm_CVC4lInLsFI83uaxoX48';
 
+  let accessToken = null;
   let allLeads = [], allContactos = [], currentTab = 'leads', currentSearch = '';
 
-  /* AUTH */
-  function doLogin() {
-    const pwd = document.getElementById('pwd').value;
-    if (pwd === ADMIN_PASS) {
-      sessionStorage.setItem('admin_auth', '1');
-      showAdmin();
-    } else {
-      document.getElementById('pwd').classList.add('err');
-      document.getElementById('login-err').style.display = 'block';
+  /* ── AUTH ── */
+  async function doLogin() {
+    const email = document.getElementById('adm-email').value.trim();
+    const pwd   = document.getElementById('adm-pwd').value;
+    const btn   = document.getElementById('login-btn');
+    const errEl = document.getElementById('login-err-msg');
+    errEl.style.display = 'none';
+    if (!email || !pwd) return;
+    btn.disabled = true; btn.textContent = 'Entrando…';
+
+    try {
+      const res = await fetch(`${SB_URL}/auth/v1/token?grant_type=password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON },
+        body: JSON.stringify({ email, password: pwd }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.access_token) throw new Error();
+      accessToken = data.access_token;
+      sessionStorage.setItem('sb_token', accessToken);
+      sessionStorage.setItem('sb_email', data.user?.email || email);
+      showAdmin(data.user?.email || email);
+    } catch {
+      errEl.style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Entrar →';
     }
   }
-  function doLogout() {
-    sessionStorage.removeItem('admin_auth');
+
+  async function doLogout() {
+    try {
+      await fetch(`${SB_URL}/auth/v1/logout`, {
+        method: 'POST',
+        headers: { 'apikey': SB_ANON, 'Authorization': `Bearer ${accessToken}` },
+      });
+    } catch {}
+    sessionStorage.removeItem('sb_token');
+    sessionStorage.removeItem('sb_email');
+    accessToken = null;
     location.reload();
   }
-  function showAdmin() {
+
+  function showAdmin(email) {
     document.getElementById('login-wrap').style.display = 'none';
     document.getElementById('admin-wrap').style.display = 'block';
+    document.getElementById('admin-user-email').textContent = email || '';
     loadData();
   }
-  if (sessionStorage.getItem('admin_auth') === '1') showAdmin();
 
-  /* DATA */
-  async function fetchTable(name, order = 'created_at') {
-    const res = await fetch(`${SB_URL}/rest/v1/${name}?order=${order}.desc&limit=500`, {
-      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+  // Restore session on reload
+  const savedToken = sessionStorage.getItem('sb_token');
+  if (savedToken) {
+    accessToken = savedToken;
+    showAdmin(sessionStorage.getItem('sb_email'));
+  }
+
+  /* ── DATA ── */
+  async function fetchTable(name) {
+    const res = await fetch(`${SB_URL}/rest/v1/${name}?order=created_at.desc&limit=500`, {
+      headers: { 'apikey': SB_ANON, 'Authorization': `Bearer ${accessToken}` }
     });
+    if (res.status === 401) { doLogout(); return []; }
     return res.ok ? res.json() : [];
   }
 
@@ -277,11 +247,11 @@
     const weekAgo = new Date(now - 7*24*60*60*1000).toISOString();
     document.getElementById('s-total').textContent = allLeads.length;
     document.getElementById('s-today').textContent = allLeads.filter(r => r.created_at.startsWith(today)).length;
-    document.getElementById('s-week').textContent = allLeads.filter(r => r.created_at >= weekAgo).length;
+    document.getElementById('s-week').textContent  = allLeads.filter(r => r.created_at >= weekAgo).length;
     document.getElementById('s-contact').textContent = allContactos.length;
   }
 
-  /* TABS */
+  /* ── TABS ── */
   function switchTab(tab, btn) {
     currentTab = tab; currentSearch = '';
     document.querySelector('.search-input').value = '';
@@ -293,7 +263,7 @@
 
   function filterTable(q) { currentSearch = q.toLowerCase(); renderTable(); }
 
-  /* RENDER */
+  /* ── TABLE ── */
   function fmt(iso) {
     if (!iso) return '—';
     const d = new Date(iso);
@@ -301,90 +271,154 @@
            d.toLocaleTimeString('es-ES', { hour:'2-digit', minute:'2-digit' });
   }
 
+  function maskDni(dni) {
+    if (!dni) return '—';
+    return '•••••' + String(dni).slice(-4);
+  }
+
+  function esc(s) {
+    if (s == null) return '—';
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
   function renderTable() {
-    const data = (currentTab === 'leads' ? allLeads : allContactos).filter(r => {
-      if (!currentSearch) return true;
-      return JSON.stringify(r).toLowerCase().includes(currentSearch);
-    });
+    const data = (currentTab === 'leads' ? allLeads : allContactos).filter(r =>
+      !currentSearch || JSON.stringify(r).toLowerCase().includes(currentSearch)
+    );
 
     if (!data.length) {
       document.getElementById('table-body').innerHTML = '<div class="empty">No hay registros.</div>';
       return;
     }
 
+    const tbody = document.getElementById('table-body');
+
     if (currentTab === 'leads') {
-      document.getElementById('table-body').innerHTML = `
-        <table>
-          <thead><tr>
-            <th>Nombre</th><th>Email</th><th>Teléfono</th>
-            <th>Matrícula</th><th>DNI</th><th>Contrato</th><th>Fecha</th>
-          </tr></thead>
-          <tbody>${data.map((r,i) => `
-            <tr onclick="openModal(${i},'leads')">
-              <td class="name">${esc(r.nombre)} ${esc(r.apellidos)}</td>
-              <td>${esc(r.email)}</td>
-              <td>${esc(r.telefono)}</td>
-              <td>${r.matricula ? esc(r.matricula) : '<span style="color:var(--ink-3)">—</span>'}</td>
-              <td>${r.dni ? esc(r.dni) : '<span style="color:var(--ink-3)">—</span>'}</td>
-              <td>${r.contrato_info ? '<span class="badge lead">Adjunto</span>' : '<span style="color:var(--ink-3);font-size:.76rem">Sin contrato</span>'}</td>
-              <td class="date">${fmt(r.created_at)}</td>
-            </tr>`).join('')}
-          </tbody>
-        </table>`;
+      const table = document.createElement('table');
+      table.innerHTML = `<thead><tr>
+        <th>Nombre</th><th>Email</th><th>Teléfono</th>
+        <th>Matrícula</th><th>DNI</th><th>Contrato</th><th>Fecha</th>
+      </tr></thead>`;
+      const tbodyEl = document.createElement('tbody');
+      data.forEach((r, i) => {
+        const tr = document.createElement('tr');
+        tr.addEventListener('click', () => openModal(i, 'leads'));
+        const cells = [
+          `${esc(r.nombre)} ${esc(r.apellidos)}`,
+          esc(r.email),
+          esc(r.telefono),
+          r.matricula ? esc(r.matricula) : '<span style="color:var(--ink-3)">—</span>',
+          r.dni ? maskDni(r.dni) : '<span style="color:var(--ink-3)">—</span>',
+          r.contrato_info ? '<span class="badge lead">Adjunto</span>' : '<span style="color:var(--ink-3);font-size:.76rem">Sin contrato</span>',
+          fmt(r.created_at),
+        ];
+        cells.forEach((c, ci) => {
+          const td = document.createElement('td');
+          if (ci === 0) td.className = 'name';
+          if (ci === 6) td.className = 'date';
+          td.innerHTML = c;
+          tr.appendChild(td);
+        });
+        tbodyEl.appendChild(tr);
+      });
+      table.appendChild(tbodyEl);
+      tbody.innerHTML = '';
+      tbody.appendChild(table);
     } else {
-      document.getElementById('table-body').innerHTML = `
-        <table>
-          <thead><tr>
-            <th>Nombre</th><th>Email</th><th>Teléfono</th><th>Mensaje</th><th>Fecha</th>
-          </tr></thead>
-          <tbody>${data.map((r,i) => `
-            <tr onclick="openModal(${i},'contactos')">
-              <td class="name">${esc(r.nombre)}</td>
-              <td>${esc(r.email)}</td>
-              <td>${r.telefono ? esc(r.telefono) : '<span style="color:var(--ink-3)">—</span>'}</td>
-              <td style="max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(r.mensaje)}</td>
-              <td class="date">${fmt(r.created_at)}</td>
-            </tr>`).join('')}
-          </tbody>
-        </table>`;
+      const table = document.createElement('table');
+      table.innerHTML = `<thead><tr><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Mensaje</th><th>Fecha</th></tr></thead>`;
+      const tbodyEl = document.createElement('tbody');
+      data.forEach((r, i) => {
+        const tr = document.createElement('tr');
+        tr.addEventListener('click', () => openModal(i, 'contactos'));
+        [[esc(r.nombre),'name'], [esc(r.email),''], [esc(r.telefono),''], [esc(r.mensaje),'msg'], [fmt(r.created_at),'date']].forEach(([val, cls]) => {
+          const td = document.createElement('td');
+          if (cls) td.className = cls;
+          if (cls === 'msg') { td.style.maxWidth = '280px'; td.style.whiteSpace = 'nowrap'; td.style.overflow = 'hidden'; td.style.textOverflow = 'ellipsis'; }
+          td.innerHTML = val;
+          tr.appendChild(td);
+        });
+        tbodyEl.appendChild(tr);
+      });
+      table.appendChild(tbodyEl);
+      tbody.innerHTML = '';
+      tbody.appendChild(table);
     }
   }
 
-  function esc(s) { return s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : '—'; }
-
-  /* MODAL */
+  /* ── MODAL ── */
   function openModal(i, tab) {
     const r = tab === 'leads' ? allLeads[i] : allContactos[i];
-    const labels = tab === 'leads'
-      ? { nombre:'Nombre', apellidos:'Apellidos', email:'Email', telefono:'Teléfono', matricula:'Matrícula', dni:'DNI', contrato_info:'Contrato', created_at:'Fecha' }
-      : { nombre:'Nombre', email:'Email', telefono:'Teléfono', mensaje:'Mensaje', created_at:'Fecha' };
+    const container = document.getElementById('modal-content');
+    container.innerHTML = '';
 
-    document.getElementById('modal-content').innerHTML = Object.entries(labels).map(([k, label]) => {
-      let val = r[k] || '—';
-      if (k === 'created_at') val = fmt(r[k]);
-      if (k === 'email') val = `<a href="mailto:${esc(r[k])}">${esc(r[k])}</a>`;
-      if (k === 'telefono' && r[k]) val = `<a href="tel:${esc(r[k])}">${esc(r[k])}</a>`;
-      if (k === 'contrato_info' && r[k]) val = `<a href="javascript:void(0)" onclick="downloadFile('${esc(r[k])}')">Descargar archivo →</a>`;
-      return `<div class="modal-row"><div class="modal-key">${label}</div><div class="modal-val">${val}</div></div>`;
-    }).join('');
+    const fields = tab === 'leads'
+      ? [['Nombre', r.nombre], ['Apellidos', r.apellidos], ['Email', r.email], ['Teléfono', r.telefono],
+         ['Matrícula', r.matricula], ['DNI', r.dni ? maskDni(r.dni) : null], ['Contrato', r.contrato_info ? '__file__' : null], ['Fecha', fmt(r.created_at)]]
+      : [['Nombre', r.nombre], ['Email', r.email], ['Teléfono', r.telefono], ['Mensaje', r.mensaje], ['Fecha', fmt(r.created_at)]];
+
+    fields.forEach(([label, val]) => {
+      const row = document.createElement('div');
+      row.className = 'modal-row';
+
+      const keyEl = document.createElement('div');
+      keyEl.className = 'modal-key';
+      keyEl.textContent = label;
+
+      const valEl = document.createElement('div');
+      valEl.className = 'modal-val';
+
+      if (label === 'Email' && val) {
+        const a = document.createElement('a');
+        a.href = `mailto:${val}`;
+        a.textContent = val;
+        valEl.appendChild(a);
+      } else if (label === 'Teléfono' && val) {
+        const a = document.createElement('a');
+        a.href = `tel:${val}`;
+        a.textContent = val;
+        valEl.appendChild(a);
+      } else if (val === '__file__') {
+        const btn = document.createElement('button');
+        btn.className = 'dl-btn';
+        btn.textContent = 'Descargar contrato →';
+        btn.addEventListener('click', () => downloadFile(r.contrato_info));
+        valEl.appendChild(btn);
+      } else {
+        valEl.textContent = val || '—';
+      }
+
+      row.appendChild(keyEl);
+      row.appendChild(valEl);
+      container.appendChild(row);
+    });
 
     document.getElementById('modal-bg').classList.add('show');
   }
 
   function closeModal() { document.getElementById('modal-bg').classList.remove('show'); }
+  document.getElementById('modal-bg').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+  /* ── FILE DOWNLOAD via signed URL ── */
   async function downloadFile(path) {
-    const res = await fetch(`${SB_URL}/storage/v1/object/contratos/${path}`, {
-      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
-    });
-    if (!res.ok) { alert('Error al descargar el archivo.'); return; }
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = path.split('/').pop();
-    document.body.appendChild(a); a.click();
-    document.body.removeChild(a); URL.revokeObjectURL(url);
+    try {
+      const res = await fetch(`${SB_URL}/storage/v1/object/sign/contratos/${path}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SB_ANON, 'Authorization': `Bearer ${accessToken}` },
+        body: JSON.stringify({ expiresIn: 60 }),
+      });
+      if (!res.ok) throw new Error();
+      const { signedURL } = await res.json();
+      const a = document.createElement('a');
+      a.href = SB_URL + signedURL;
+      a.download = path.split('/').pop();
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    } catch {
+      alert('Error al descargar el archivo.');
+    }
   }
 </script>
 </body>

@@ -526,6 +526,7 @@
           <div class="form-testi">"Rellené el formulario en 2 minutos. A los 3 meses recuperé 2.800 €" <span>— Sergio, Bilbao</span></div>
           <form id="hf" novalidate>
             <div class="form-err-msg" id="herr">Ha ocurrido un error al enviar. Por favor inténtalo de nuevo.</div>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none!important;position:absolute;left:-9999px;" aria-hidden="true" />
             <div class="fg-row">
               <div class="fg"><label for="h1">Nombre</label><input id="h1" name="nombre" type="text" placeholder="Carlos" required /></div>
               <div class="fg"><label for="h2">Apellidos</label><input id="h2" name="apellidos" type="text" placeholder="García López" required /></div>
@@ -873,6 +874,7 @@
           <div class="form-testi">"Rellené el formulario en 2 minutos. A los 3 meses recuperé 2.800 €" <span>— Sergio, Bilbao</span></div>
           <form id="ff" novalidate>
             <div class="form-err-msg" id="ferr">Ha ocurrido un error al enviar. Por favor inténtalo de nuevo.</div>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none!important;position:absolute;left:-9999px;" aria-hidden="true" />
             <div class="fg-row">
               <div class="fg"><label for="f1">Nombre</label><input id="f1" name="nombre" type="text" placeholder="Carlos" required /></div>
               <div class="fg"><label for="f2">Apellidos</label><input id="f2" name="apellidos" type="text" placeholder="García López" required /></div>
@@ -903,7 +905,7 @@
             </div>
             <div class="form-priv" id="fwrap">
               <input type="checkbox" id="fpriv" name="privacy" required />
-              <label for="fpriv">He leído y acepto la <a href="#">política de privacidad</a> y el <a href="#">aviso legal</a>.</label>
+              <label for="fpriv">He leído y acepto la <a href="privacidad.html">política de privacidad</a> y el <a href="aviso-legal.html">aviso legal</a>.</label>
             </div>
             <button type="submit" class="btn" id="fbtn">Quiero reclamar mis intereses →</button>
             <div class="form-safe"><svg viewBox="0 0 12 14" fill="none"><path d="M6 1L1 3v4c0 2.8 2.1 5.4 5 6 2.9-.6 5-3.2 5-6V3L6 1z" stroke="currentColor" stroke-width="1.2"/></svg>Datos protegidos · Sin spam</div>
@@ -1046,7 +1048,9 @@
   function wire(formId, okId, errId, btnId) {
     document.getElementById(formId).addEventListener('submit', async e => {
       e.preventDefault();
-      const form = e.target; let ok = true;
+      const form = e.target;
+      if (form.querySelector('[name="website"]').value) return;
+      let ok = true;
       document.getElementById(errId).style.display = 'none';
 
       ['nombre','apellidos','email','telefono','estado'].forEach(n => {
@@ -1124,6 +1128,10 @@
     const input = document.getElementById(prefix + '-file');
     if (!input || !input.files[0]) return null;
     const file = input.files[0];
+    if (file.size > 10 * 1024 * 1024) {
+      alert('El archivo no puede superar los 10 MB.');
+      return null;
+    }
     const ext = file.name.split('.').pop();
     const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
     const res = await fetch(`${SB_URL}/storage/v1/object/contratos/${path}`, {
@@ -1149,7 +1157,7 @@
 <div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#fff;border-top:1px solid var(--line);padding:16px 24px;box-shadow:0 -4px 24px rgba(0,0,0,.08);">
   <div style="max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
     <p style="font-size:.78rem;color:var(--ink-2);line-height:1.5;margin:0;">
-      Usamos cookies propias y de terceros (Google Analytics) para mejorar tu experiencia y analizar el uso del sitio. Puedes aceptarlas o rechazar las no esenciales. <a href="#" style="color:var(--accent);text-decoration:underline;text-underline-offset:2px;">Política de cookies</a>
+      Usamos cookies propias y de terceros (Google Analytics) para mejorar tu experiencia y analizar el uso del sitio. Puedes aceptarlas o rechazar las no esenciales. <a href="cookies.html" style="color:var(--accent);text-decoration:underline;text-underline-offset:2px;">Política de cookies</a>
     </p>
     <div style="display:flex;gap:8px;flex-shrink:0;">
       <button onclick="cookieChoice(false)" style="font-family:'Sora',sans-serif;font-size:.78rem;font-weight:600;padding:9px 16px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink-3);cursor:pointer;">Solo esenciales</button>
@@ -1159,10 +1167,19 @@
 </div>
 
 <script>
+  function getCookie(name) {
+    return document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith(name + '='))?.split('=')[1] || '';
+  }
+  function setCookie(name, value) {
+    var expires = new Date(Date.now() + 365 * 864e5).toUTCString();
+    document.cookie = name + '=' + value + '; expires=' + expires + '; path=/; SameSite=Strict; Secure';
+  }
+
   (function() {
-    if (!localStorage.getItem('cookie_consent')) {
+    var consent = getCookie('cookie_consent');
+    if (!consent) {
       document.getElementById('cookie-bar').style.display = 'block';
-    } else if (localStorage.getItem('cookie_consent') === 'all') {
+    } else if (consent === 'all') {
       loadGA();
     }
   })();
@@ -1182,7 +1199,7 @@
   }
 
   function cookieChoice(all) {
-    localStorage.setItem('cookie_consent', all ? 'all' : 'essential');
+    setCookie('cookie_consent', all ? 'all' : 'essential');
     document.getElementById('cookie-bar').style.display = 'none';
     if (all) loadGA();
   }

@@ -148,6 +148,7 @@
           <div id="contact-form-body">
             <div class="form-err" id="contact-err">Error al enviar. Por favor inténtalo de nuevo.</div>
             <form id="contact-form" novalidate>
+              <input type="text" name="website" tabindex="-1" autocomplete="off" style="display:none!important;position:absolute;left:-9999px;" aria-hidden="true" />
               <div class="fg"><label for="c-nombre">Nombre</label><input id="c-nombre" name="nombre" type="text" placeholder="Tu nombre" required /></div>
               <div class="fg"><label for="c-email">Email</label><input id="c-email" name="email" type="email" placeholder="tu@email.com" required /></div>
               <div class="fg"><label for="c-tel">Teléfono</label><input id="c-tel" name="telefono" type="tel" placeholder="6XX XXX XXX" /></div>
@@ -191,6 +192,7 @@
   document.getElementById('contact-form').addEventListener('submit', async e => {
     e.preventDefault();
     const form = e.target;
+    if (form.querySelector('[name="website"]').value) return;
     document.getElementById('contact-err').style.display = 'none';
 
     let ok = true;
