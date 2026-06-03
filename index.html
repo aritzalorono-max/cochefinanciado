@@ -535,6 +535,15 @@
                 <option value="cancelado">Lo cancelé anticipadamente</option>
               </select>
             </div>
+            <div class="fg">
+              <label for="hcontrato">Contrato de financiación (si lo tienes)</label>
+              <input id="hcontrato" name="contrato_info" type="text" placeholder="Sube una foto o indica que no lo tienes" />
+              <span style="font-size:.7rem;color:var(--ink-3);margin-top:4px;">Si no tienes el contrato, indica la matrícula del coche y tu DNI y lo solicitamos nosotros.</span>
+            </div>
+            <div class="fg-row">
+              <div class="fg"><label for="hmatricula">Matrícula del coche</label><input id="hmatricula" name="matricula" type="text" placeholder="Ej: 1234 ABC" /></div>
+              <div class="fg"><label for="hdni">DNI</label><input id="hdni" name="dni" type="text" placeholder="Ej: 12345678A" /></div>
+            </div>
             <div class="form-priv" id="hwrap">
               <input type="checkbox" id="hpriv" name="privacy" required />
               <label for="hpriv">He leído y acepto la <a href="#">política de privacidad</a> y el <a href="#">aviso legal</a>.</label>
@@ -888,6 +897,15 @@
                 <option value="cancelado">Lo cancelé anticipadamente</option>
               </select>
             </div>
+            <div class="fg">
+              <label for="fcontrato">Contrato de financiación (si lo tienes)</label>
+              <input id="fcontrato" name="contrato_info" type="text" placeholder="Sube una foto o indica que no lo tienes" />
+              <span style="font-size:.7rem;color:var(--ink-3);margin-top:4px;">Si no tienes el contrato, indica la matrícula del coche y tu DNI y lo solicitamos nosotros.</span>
+            </div>
+            <div class="fg-row">
+              <div class="fg"><label for="fmatricula">Matrícula del coche</label><input id="fmatricula" name="matricula" type="text" placeholder="Ej: 1234 ABC" /></div>
+              <div class="fg"><label for="fdni">DNI</label><input id="fdni" name="dni" type="text" placeholder="Ej: 12345678A" /></div>
+            </div>
             <div class="form-priv" id="fwrap">
               <input type="checkbox" id="fpriv" name="privacy" required />
               <label for="fpriv">He leído y acepto la <a href="#">política de privacidad</a> y el <a href="#">aviso legal</a>.</label>
@@ -1048,12 +1066,15 @@
       try {
         const fd = new FormData(form);
         await submitLead({
-          nombre:    fd.get('nombre'),
-          apellidos: fd.get('apellidos'),
-          email:     fd.get('email'),
-          telefono:  fd.get('telefono'),
-          entidad:   fd.get('entidad') || null,
-          estado:    fd.get('estado') || null,
+          nombre:        fd.get('nombre'),
+          apellidos:     fd.get('apellidos'),
+          email:         fd.get('email'),
+          telefono:      fd.get('telefono'),
+          entidad:       fd.get('entidad') || null,
+          estado:        fd.get('estado') || null,
+          contrato_info: fd.get('contrato_info') || null,
+          matricula:     fd.get('matricula') || null,
+          dni:           fd.get('dni') || null,
         });
       } catch {
         btn.disabled = false;
