@@ -364,7 +364,7 @@
       if (k === 'created_at') val = fmt(r[k]);
       if (k === 'email') val = `<a href="mailto:${esc(r[k])}">${esc(r[k])}</a>`;
       if (k === 'telefono' && r[k]) val = `<a href="tel:${esc(r[k])}">${esc(r[k])}</a>`;
-      if (k === 'contrato_info' && r[k]) val = `<a href="${SB_URL}/storage/v1/object/contratos/${esc(r[k])}" target="_blank">Ver archivo →</a>`;
+      if (k === 'contrato_info' && r[k]) val = `<a href="javascript:void(0)" onclick="downloadFile('${esc(r[k])}')">Descargar archivo →</a>`;
       return `<div class="modal-row"><div class="modal-key">${label}</div><div class="modal-val">${val}</div></div>`;
     }).join('');
 
@@ -373,6 +373,19 @@
 
   function closeModal() { document.getElementById('modal-bg').classList.remove('show'); }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  async function downloadFile(path) {
+    const res = await fetch(`${SB_URL}/storage/v1/object/contratos/${path}`, {
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+    });
+    if (!res.ok) { alert('Error al descargar el archivo.'); return; }
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = path.split('/').pop();
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  }
 </script>
 </body>
 </html>
