@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CocheFinanciado.es — Reclama los costes abusivos de tu financiación</title>
+  <meta name="description" content="El 90% de los contratos de financiación de coches son abusivos. Recupara tu dinero gratis y sin riesgo. Calculadora gratuita online."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:    #1a56db;
+      --brand-dk: #1241a8;
+      --accent:   #f59e0b;
+      --green:    #16a34a;
+      --red:      #dc2626;
+      --dark:     #0f172a;
+      --mid:      #334155;
+      --light:    #64748b;
+      --bg:       #f8fafc;
+      --white:    #ffffff;
+      --border:   #e2e8f0;
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ─────────────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .header-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-size: 1.25rem; font-weight: 800;
+      color: var(--brand); text-decoration: none; letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    .header-cta {
+      background: var(--brand); color: var(--white);
+      border: none; border-radius: 8px;
+      padding: 10px 20px; font-size: .9rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s;
+    }
+    .header-cta:hover { background: var(--brand-dk); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: var(--white);
+      padding: 80px 24px 100px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 0%, rgba(99,102,241,.25) 0%, transparent 60%);
+    }
+    .hero-inner { max-width: 780px; margin: 0 auto; position: relative; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(245,158,11,.15);
+      border: 1px solid rgba(245,158,11,.4);
+      color: var(--accent);
+      padding: 6px 16px; border-radius: 100px;
+      font-size: .8rem; font-weight: 600; letter-spacing: .5px;
+      text-transform: uppercase; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -1.5px; margin-bottom: 20px;
+    }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,.8);
+      max-width: 600px; margin: 0 auto 36px;
+    }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: #000;
+      padding: 16px 36px; border-radius: 10px;
+      font-size: 1.05rem; font-weight: 700;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,158,11,.4); }
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,.4);
+      color: var(--white);
+      padding: 14px 28px; border-radius: 10px;
+      font-size: 1rem; font-weight: 600;
+      text-decoration: none; cursor: pointer;
+      transition: border-color .2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.8); }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 48px;
+      margin-top: 56px; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: .85rem; color: rgba(255,255,255,.65); margin-top: 4px; }
+
+    /* ── STRIP ───────────────────────────────────────── */
+    .strip {
+      background: var(--accent);
+      padding: 14px 24px; text-align: center;
+      font-weight: 700; font-size: .95rem; color: #000;
+    }
+
+    /* ── SECTIONS ────────────────────────────────────── */
+    section { padding: 80px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block;
+      background: #eff6ff; color: var(--brand);
+      padding: 4px 14px; border-radius: 100px;
+      font-size: .8rem; font-weight: 600; letter-spacing: .5px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 800; letter-spacing: -1px; line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--light); max-width: 560px;
+      margin-bottom: 48px;
+    }
+
+    /* ── WHY ─────────────────────────────────────────── */
+    .why { background: var(--bg); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 24px; }
+    .card {
+      background: var(--white); border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 28px; transition: box-shadow .2s;
+    }
+    .card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); }
+    .card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: #eff6ff; display: flex; align-items: center;
+      justify-content: center; font-size: 1.4rem; margin-bottom: 16px;
+    }
+    .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .card p { font-size: .9rem; color: var(--light); }
+
+    /* ── HOW IT WORKS ────────────────────────────────── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 32px; position: relative; }
+    .step { text-align: center; }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--brand); color: var(--white);
+      font-size: 1.25rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step h3 { font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: .9rem; color: var(--light); }
+
+    /* ── CALCULATOR ──────────────────────────────────── */
+    .calculator-wrap {
+      background: var(--dark);
+      border-radius: 20px;
+      padding: 48px;
+      color: var(--white);
+      max-width: 800px; margin: 0 auto;
+    }
+    .calc-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .calc-sub { color: rgba(255,255,255,.6); margin-bottom: 36px; }
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+    @media(max-width:580px){ .calc-grid { grid-template-columns: 1fr; } }
+    .field label {
+      display: block; font-size: .85rem; font-weight: 600;
+      color: rgba(255,255,255,.7); margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 12px 16px;
+      background: rgba(255,255,255,.08);
+      border: 1.5px solid rgba(255,255,255,.15);
+      border-radius: 10px; color: var(--white);
+      font-size: 1rem; font-family: inherit;
+      transition: border-color .2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .field input:focus, .field select:focus {
+      outline: none; border-color: var(--accent);
+    }
+    .field input::placeholder { color: rgba(255,255,255,.3); }
+    .field select option { background: #1e293b; color: #fff; }
+    .btn-calc {
+      width: 100%; padding: 16px;
+      background: var(--accent); color: #000;
+      font-size: 1.05rem; font-weight: 700;
+      border: none; border-radius: 10px; cursor: pointer;
+      transition: opacity .2s;
+    }
+    .btn-calc:hover { opacity: .9; }
+    .calc-result {
+      margin-top: 28px;
+      background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.12);
+      border-radius: 14px; padding: 28px;
+      display: none;
+    }
+    .calc-result.show { display: block; }
+    .result-label { font-size: .85rem; color: rgba(255,255,255,.6); margin-bottom: 6px; }
+    .result-amount {
+      font-size: 2.8rem; font-weight: 900;
+      color: var(--accent); letter-spacing: -1px; line-height: 1;
+      margin-bottom: 12px;
+    }
+    .result-note { font-size: .85rem; color: rgba(255,255,255,.5); }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+    .result-item { background: rgba(255,255,255,.05); border-radius: 10px; padding: 16px; }
+    .result-item .label { font-size: .78rem; color: rgba(255,255,255,.5); margin-bottom: 4px; }
+    .result-item .value { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+
+    /* ── FORM ────────────────────────────────────────── */
+    .form-section { background: var(--bg); }
+    .form-wrap {
+      background: var(--white); border-radius: 20px;
+      border: 1px solid var(--border);
+      padding: 48px; max-width: 700px; margin: 0 auto;
+    }
+    .form-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .form-sub { color: var(--light); margin-bottom: 32px; font-size: .95rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media(max-width:580px){ .form-grid { grid-template-columns: 1fr; } }
+    .form-field label {
+      display: block; font-size: .85rem; font-weight: 600;
+      color: var(--mid); margin-bottom: 8px;
+    }
+    .form-field input, .form-field select, .form-field textarea {
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px; font-size: .95rem;
+      font-family: inherit; color: var(--dark);
+      background: var(--white);
+      transition: border-color .2s;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+      outline: none; border-color: var(--brand);
+    }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field textarea { resize: vertical; min-height: 90px; }
+    .form-check {
+      display: flex; align-items: flex-start; gap: 10px;
+      grid-column: 1 / -1; margin-top: 4px;
+    }
+    .form-check input[type=checkbox] { margin-top: 3px; flex-shrink: 0; }
+    .form-check label { font-size: .82rem; color: var(--light); }
+    .form-check a { color: var(--brand); }
+    .btn-submit {
+      grid-column: 1 / -1;
+      width: 100%; padding: 16px;
+      background: var(--brand); color: var(--white);
+      font-size: 1.05rem; font-weight: 700;
+      border: none; border-radius: 10px; cursor: pointer;
+      transition: background .2s; margin-top: 4px;
+    }
+    .btn-submit:hover { background: var(--brand-dk); }
+    .form-success {
+      display: none; text-align: center; padding: 32px 0;
+    }
+    .form-success.show { display: block; }
+    .success-icon { font-size: 3rem; margin-bottom: 16px; }
+    .success-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+    .success-msg { color: var(--light); }
+
+    /* ── TRUST ───────────────────────────────────────── */
+    .trust-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 20px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--bg); border-radius: 12px;
+      padding: 20px 22px;
+    }
+    .trust-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .trust-item strong { font-weight: 700; font-size: .95rem; display: block; }
+    .trust-item span { font-size: .82rem; color: var(--light); }
+
+    /* ── FAQ ─────────────────────────────────────────── */
+    .faq-list { max-width: 700px; margin: 0 auto; }
+    details {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    summary {
+      font-weight: 700; cursor: pointer; font-size: 1rem;
+      list-style: none; display: flex; justify-content: space-between;
+      align-items: center;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-size: 1.4rem; color: var(--brand); }
+    details[open] summary::after { content: '−'; }
+    details p { margin-top: 12px; color: var(--light); font-size: .95rem; line-height: 1.7; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,.55);
+      padding: 40px 24px; text-align: center;
+      font-size: .85rem;
+    }
+    footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+    .footer-logo { font-size: 1.2rem; font-weight: 800; color: var(--white); margin-bottom: 12px; }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin: 12px 0 16px; flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media(max-width:640px){
+      section { padding: 56px 20px; }
+      .calculator-wrap, .form-wrap { padding: 28px 20px; }
+      .hero { padding: 56px 20px 72px; }
+      .hero-stats { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">CocheFinanciado<span>.es</span></a>
+    <a href="#formulario" class="header-cta">Reclamar ahora</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">⚠️ El 90% de los contratos son abusivos</div>
+    <h1>Recupera el dinero que te cobraron de <em>más en tu coche</em></h1>
+    <p>Si financiaste un coche, es muy probable que el banco o el concesionario te cobrase intereses abusivos. Reclamar es gratis y sin riesgo.</p>
+    <div class="hero-btns">
+      <a href="#calculadora" class="btn-primary">Calcula lo que puedes recuperar</a>
+      <a href="#como-funciona" class="btn-ghost">¿Cómo funciona?</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">90%</div>
+        <div class="stat-label">de contratos son abusivos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">+3.500€</div>
+        <div class="stat-label">recuperados de media</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0€</div>
+        <div class="stat-label">coste si no ganamos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  🚗 Solo tienes 5 años desde que firmaste el contrato para reclamar — ¡No dejes pasar más tiempo!
+</div>
+
+<!-- WHY -->
+<section class="why">
+  <div class="section-inner">
+    <span class="section-tag">Por qué reclamar</span>
+    <h2>Tu contrato de financiación probablemente tiene cláusulas abusivas</h2>
+    <p class="section-sub">Los tribunales españoles llevan años anulando contratos de financiación de vehículos por falta de transparencia y tipos de interés desproporcionados.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">💸</div>
+        <h3>Intereses ocultos</h3>
+        <p>La TAE real de muchos contratos supera el 20%, muy por encima de lo que marca la ley como abusivo.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <h3>Falta de transparencia</h3>
+        <p>La mayoría de contratos no detallan correctamente las condiciones, lo que los hace anulables judicialmente.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚖️</div>
+        <h3>Sentencias favorables</h3>
+        <p>El Tribunal Supremo y miles de juzgados ya han condenado a bancos y financieras a devolver cantidades.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <h3>Sin riesgo para ti</h3>
+        <p>Si no ganamos, no cobras nada. Nuestros honorarios son solo a éxito, así que no tienes nada que perder.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="como-funciona">
+  <div class="section-inner">
+    <span class="section-tag">Proceso</span>
+    <h2>Así de sencillo es reclamar</h2>
+    <p class="section-sub">En 3 pasos y desde el sofá de tu casa. Sin papeleos interminables ni visitas a ningún sitio.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Rellena el formulario</h3>
+        <p>Cuéntanos los datos básicos de tu financiación. Solo tarda 2 minutos.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Analizamos tu caso</h3>
+        <p>Nuestros abogados estudian tu contrato de forma gratuita y te decimos si puedes reclamar.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Recuperas tu dinero</h3>
+        <p>Gestionamos la reclamación completa. Cuando ganamos, recibes tu dinero. Sin sorpresas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="calculadora" style="background: var(--bg);">
+  <div class="section-inner" style="text-align:center;">
+    <span class="section-tag">Calculadora gratuita</span>
+    <h2>¿Cuánto dinero podrías recuperar?</h2>
+    <p class="section-sub" style="margin:0 auto 40px;">Introduce los datos de tu préstamo y calcula al instante una estimación de lo que podrías reclamar.</p>
+
+    <div class="calculator-wrap">
+      <div class="calc-title">Calculadora de reclamación</div>
+      <div class="calc-sub">Estimación orientativa basada en jurisprudencia actual</div>
+
+      <div class="calc-grid">
+        <div class="field">
+          <label>Capital financiado (€)</label>
+          <input type="number" id="capital" placeholder="Ej: 15.000" min="1000" max="100000" />
+        </div>
+        <div class="field">
+          <label>TAE del contrato (%)</label>
+          <input type="number" id="tae" placeholder="Ej: 14,5" step="0.1" min="1" max="50" />
+        </div>
+        <div class="field">
+          <label>Plazo del préstamo</label>
+          <select id="plazo">
+            <option value="">Seleccionar...</option>
+            <option value="12">1 año</option>
+            <option value="24">2 años</option>
+            <option value="36">3 años</option>
+            <option value="48">4 años</option>
+            <option value="60">5 años</option>
+            <option value="72">6 años</option>
+            <option value="84">7 años</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>¿Cuánto llevas pagado? (%)</label>
+          <select id="pagado">
+            <option value="">Seleccionar...</option>
+            <option value="25">~25% del préstamo</option>
+            <option value="50">~50% del préstamo</option>
+            <option value="75">~75% del préstamo</option>
+            <option value="100">Ya lo pagué entero</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn-calc" onclick="calcular()">Calcular mi reclamación →</button>
+
+      <div class="calc-result" id="calc-result">
+        <div class="result-label">Estimación de lo que podrías recuperar</div>
+        <div class="result-amount" id="result-amount">—</div>
+        <div class="result-note">* Estimación orientativa. El importe real puede variar según las condiciones exactas del contrato.</div>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Intereses cobrados (est.)</div>
+            <div class="value" id="res-intereses">—</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Tu TAE vs TAE justa (6%)</div>
+            <div class="value" id="res-diferencia">—</div>
+          </div>
+        </div>
+        <div style="margin-top:24px;">
+          <a href="#formulario" class="btn-primary" style="display:inline-block;">Iniciar mi reclamación gratis →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section>
+  <div class="section-inner">
+    <span class="section-tag">Garantías</span>
+    <h2>Por qué confiar en nosotros</h2>
+    <p class="section-sub">Trabajamos solo a éxito. Si no ganamos, no cobras nada.</p>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">🏆</div>
+        <div>
+          <strong>Solo cobramos si ganamos</strong>
+          <span>Honorarios 100% a éxito</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">⚡</div>
+        <div>
+          <strong>Gestión rápida</strong>
+          <span>Respuesta en menos de 24h</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div>
+          <strong>100% confidencial</strong>
+          <span>Tus datos protegidos siempre</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">👨‍⚖️</div>
+        <div>
+          <strong>Abogados especializados</strong>
+          <span>Expertos en consumo y banca</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="formulario">
+  <div class="section-inner">
+    <div class="form-wrap">
+      <div id="form-content">
+        <div class="form-title">Empieza tu reclamación gratis</div>
+        <div class="form-sub">Rellena tus datos y un abogado especializado analizará tu caso sin coste ni compromiso.</div>
+        <form id="claim-form" onsubmit="enviarFormulario(event)">
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Nombre *</label>
+              <input type="text" name="nombre" placeholder="Tu nombre" required />
+            </div>
+            <div class="form-field">
+              <label>Apellidos *</label>
+              <input type="text" name="apellidos" placeholder="Tus apellidos" required />
+            </div>
+            <div class="form-field">
+              <label>Email *</label>
+              <input type="email" name="email" placeholder="tu@email.com" required />
+            </div>
+            <div class="form-field">
+              <label>Teléfono *</label>
+              <input type="tel" name="telefono" placeholder="600 000 000" required />
+            </div>
+            <div class="form-field">
+              <label>Entidad financiadora</label>
+              <select name="entidad">
+                <option value="">Seleccionar...</option>
+                <option>Santander Consumer</option>
+                <option>BBVA Automoción</option>
+                <option>Cetelem</option>
+                <option>CaixaBank</option>
+                <option>Sabadell Consumer Finance</option>
+                <option>RCI Banque (Renault/Nissan)</option>
+                <option>PSA Financial Services</option>
+                <option>BMW Financial Services</option>
+                <option>Mercedes-Benz Financial</option>
+                <option>Volkswagen Financial Services</option>
+                <option>Cofidis</option>
+                <option>Otra</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Año de firma del contrato</label>
+              <select name="anio">
+                <option value="">Seleccionar...</option>
+                <option>2024</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+                <option>Antes de 2016</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Capital financiado aproximado</label>
+              <select name="capital">
+                <option value="">Seleccionar...</option>
+                <option>Menos de 5.000€</option>
+                <option>5.000€ – 10.000€</option>
+                <option>10.000€ – 20.000€</option>
+                <option>20.000€ – 30.000€</option>
+                <option>Más de 30.000€</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Estado del préstamo</label>
+              <select name="estado">
+                <option value="">Seleccionar...</option>
+                <option>Aún lo estoy pagando</option>
+                <option>Ya lo pagué completamente</option>
+                <option>Lo cancelé anticipadamente</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label>¿Algo más que quieras contarnos?</label>
+              <textarea name="comentario" placeholder="Información adicional (opcional)..."></textarea>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="legal" name="legal" required />
+              <label for="legal">He leído y acepto la <a href="#">política de privacidad</a> y el <a href="#">aviso legal</a>. Consiento el tratamiento de mis datos para la gestión de mi consulta. *</label>
+            </div>
+            <button type="submit" class="btn-submit">Enviar reclamación gratis →</button>
+          </div>
+        </form>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="success-icon">✅</div>
+        <div class="success-title">¡Recibido! Te contactamos en menos de 24h</div>
+        <p class="success-msg">Un abogado especializado revisará tu caso y te llamará o escribirá por email para darte todos los detalles. No tienes nada que perder.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-inner">
+    <span class="section-tag">Preguntas frecuentes</span>
+    <h2 style="text-align:center;">Resolvemos tus dudas</h2>
+    <br/>
+    <div class="faq-list">
+      <details>
+        <summary>¿Cómo sé si mi contrato es abusivo?</summary>
+        <p>Si la TAE de tu préstamo supera el doble del interés medio del mercado en el momento de la firma, o si el contrato no incluye de forma clara y comprensible todas las condiciones, puede considerarse abusivo según la ley de represión de la usura y la jurisprudencia del Tribunal Supremo. Manda tu caso y lo valoramos gratis.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto dinero puedo recuperar?</summary>
+        <p>Depende del capital financiado, la TAE aplicada y el tiempo que llevas pagando. De media, nuestros clientes recuperan entre 1.500€ y 5.000€. Usa nuestra calculadora para obtener una estimación personalizada.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa si ya he terminado de pagar el préstamo?</summary>
+        <p>Puedes reclamar igualmente. Tienes hasta 5 años desde el último pago para iniciar la reclamación. Muchos de nuestros clientes ya habían liquidado el préstamo y aun así han recuperado su dinero.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto tiempo tarda el proceso?</summary>
+        <p>Depende de si se llega a un acuerdo extrajudicial o se va a juicio. En muchos casos las financieras prefieren acordar, lo que puede resolverse en 3-6 meses. Si va a juicio, puede tardar entre 12 y 24 meses, pero nosotros gestionamos todo el proceso.</p>
+      </details>
+      <details>
+        <summary>¿Qué documentación necesito?</summary>
+        <p>Básicamente el contrato de financiación y el DNI. Si no tienes el contrato, podemos ayudarte a solicitarlo a la entidad. Con eso es suficiente para empezar.</p>
+      </details>
+      <details>
+        <summary>¿Cobráis algo por adelantado?</summary>
+        <p>No. Trabajamos 100% a éxito: solo cobramos si ganamos tu caso. Si no obtenemos resultado favorable, no te cobraremos absolutamente nada. Sin letra pequeña, sin sorpresas.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">CocheFinanciado<span>.es</span></div>
+  <p>Tu derecho a recuperar los intereses abusivos de la financiación de tu vehículo.</p>
+  <div class="footer-links">
+    <a href="#">Política de privacidad</a>
+    <a href="#">Aviso legal</a>
+    <a href="#">Cookies</a>
+    <a href="#formulario">Contacto</a>
+  </div>
+  <p>© 2025 CocheFinanciado.es — Todos los derechos reservados</p>
+</footer>
+
+<script>
+  function fmt(n) {
+    return n.toLocaleString('es-ES', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
+  }
+
+  function calcular() {
+    const capital = parseFloat(document.getElementById('capital').value);
+    const tae     = parseFloat(document.getElementById('tae').value);
+    const plazo   = parseInt(document.getElementById('plazo').value);
+    const pagado  = parseInt(document.getElementById('pagado').value);
+
+    if (!capital || !tae || !plazo || !pagado) {
+      alert('Por favor, rellena todos los campos de la calculadora.');
+      return;
+    }
+
+    // Monthly rate
+    const r = tae / 100 / 12;
+    const cuota = capital * r / (1 - Math.pow(1 + r, -plazo));
+    const totalPagado = cuota * plazo * (pagado / 100);
+    const totalIntereses = (cuota * plazo) - capital;
+
+    // Interest paid so far
+    const interesesPagados = totalIntereses * (pagado / 100);
+
+    // Fair rate (6% TAE reference)
+    const rFair = 0.06 / 12;
+    const cuotaFair = capital * rFair / (1 - Math.pow(1 + rFair, -plazo));
+    const interesesFair = (cuotaFair * plazo) - capital;
+    const interesesFairPagados = interesesFair * (pagado / 100);
+
+    const diferencia = interesesPagados - interesesFairPagados;
+    const reclamable = Math.max(0, diferencia * 0.85); // ~85% estimado recuperable
+
+    document.getElementById('result-amount').textContent = fmt(reclamable);
+    document.getElementById('res-intereses').textContent = fmt(interesesPagados);
+    document.getElementById('res-diferencia').textContent = tae.toFixed(1) + '% vs 6% TAE';
+
+    const result = document.getElementById('calc-result');
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function enviarFormulario(e) {
+    e.preventDefault();
+    // Simulate form submission
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('form-content').style.display = 'none';
+      document.getElementById('form-success').classList.add('show');
+    }, 1200);
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
