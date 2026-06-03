@@ -500,25 +500,7 @@
           <div class="fc-title">Analiza tu caso gratis</div>
           <div class="fc-sub">Sin llamadas · Valoración en 48 h · Recuperación media: 3.200&nbsp;€</div>
           <div class="form-testi">"Rellené el formulario en 2 minutos. A los 3 meses recuperé 2.800 €" <span>— Sergio, Bilbao</span></div>
-          <div id="quiz" class="quiz">
-            <div class="quiz-q">¿Cómo fue tu financiación?</div>
-            <div class="quiz-opts">
-              <button type="button" class="quiz-opt" onclick="quizSelect('concesionario')">
-                <span class="quiz-ico">🚗</span>
-                <span>La firmé en el<br/>concesionario al comprar el coche</span>
-              </button>
-              <button type="button" class="quiz-opt" onclick="quizSelect('banco')">
-                <span class="quiz-ico">🏦</span>
-                <span>La tramité con<br/>mi banco o financiera</span>
-              </button>
-              <button type="button" class="quiz-opt" onclick="quizSelect('online')">
-                <span class="quiz-ico">💻</span>
-                <span>La hice online o<br/>no recuerdo bien los detalles</span>
-              </button>
-            </div>
-            <p class="quiz-skip" onclick="quizSkip()">Prefiero indicarlo en el formulario →</p>
-          </div>
-          <form id="hf" style="display:none" novalidate>
+          <form id="hf" novalidate>
             <div class="form-err-msg" id="herr">Ha ocurrido un error al enviar. Por favor inténtalo de nuevo.</div>
             <div class="fg-row">
               <div class="fg"><label for="h1">Nombre</label><input id="h1" name="nombre" type="text" placeholder="Carlos" required /></div>
