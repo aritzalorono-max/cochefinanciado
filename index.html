@@ -440,6 +440,30 @@
     .quiz-skip { font-size: .72rem; color: var(--ink-3); text-align: center; margin-top: 10px; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
     .quiz-skip:hover { color: var(--accent); }
 
+    /* Contrato toggle */
+    .contrato-toggle { display: flex; gap: 8px; margin-bottom: 10px; }
+    .toggle-btn {
+      flex: 1; padding: 10px; border: 1.5px solid var(--line);
+      border-radius: 8px; background: var(--bg);
+      font-family: 'Sora', sans-serif; font-size: .82rem; font-weight: 600;
+      color: var(--ink-2); cursor: pointer; transition: border-color .15s, background .15s;
+    }
+    .toggle-btn:hover { border-color: var(--accent); background: #f4f7ff; }
+    .toggle-btn.sel { border-color: var(--accent); background: #eff4ff; color: var(--accent); }
+    .contrato-si, .contrato-no { display: none; }
+    .contrato-si.show, .contrato-no.show { display: block; }
+    .file-label {
+      display: flex; align-items: center; gap: 10px;
+      border: 1.5px dashed var(--line); border-radius: 8px;
+      padding: 14px 16px; cursor: pointer;
+      transition: border-color .15s, background .15s;
+      font-size: .85rem; color: var(--ink-3);
+    }
+    .file-label:hover { border-color: var(--accent); background: #f4f7ff; color: var(--ink); }
+    .file-label input[type="file"] { display: none; }
+    .file-label .file-icon { font-size: 1.2rem; }
+    .file-name { font-size: .78rem; color: var(--accent); margin-top: 6px; font-weight: 600; }
+
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .hero-grid, .cta2-grid, .calc-wrap { grid-template-columns: 1fr; gap: 40px; }
@@ -509,13 +533,26 @@
             <div class="fg"><label for="h3">Email</label><input id="h3" name="email" type="email" placeholder="carlos@ejemplo.com" required /></div>
             <div class="fg"><label for="h4">Teléfono</label><input id="h4" name="telefono" type="tel" placeholder="6XX XXX XXX" required /></div>
             <div class="fg">
-              <label for="hcontrato">¿Tienes el contrato de financiación?</label>
-              <textarea id="hcontrato" name="contrato_info" rows="2" placeholder="Ej: Sí, lo tengo / No lo tengo" style="font-family:'Sora',sans-serif;font-size:.88rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 13px;resize:none;transition:border-color .15s,box-shadow .15s;"></textarea>
-              <span style="font-size:.7rem;color:var(--ink-3);margin-top:4px;">Si no tienes el contrato, no te preocupes — con la matrícula y tu DNI lo solicitamos nosotros a la financiera.</span>
-            </div>
-            <div class="fg-row">
-              <div class="fg"><label for="hmatricula">Matrícula del coche</label><input id="hmatricula" name="matricula" type="text" placeholder="Ej: 1234 ABC" /></div>
-              <div class="fg"><label for="hdni">DNI</label><input id="hdni" name="dni" type="text" placeholder="Ej: 12345678A" /></div>
+              <label>¿Tienes el contrato de financiación?</label>
+              <div class="contrato-toggle">
+                <button type="button" class="toggle-btn" onclick="toggleContrato(this,'h','si')">✓ Sí, lo tengo</button>
+                <button type="button" class="toggle-btn" onclick="toggleContrato(this,'h','no')">✗ No lo tengo</button>
+              </div>
+              <div class="contrato-si" id="h-contrato-si">
+                <label class="file-label">
+                  <span class="file-icon">📎</span>
+                  <span id="h-file-text">Adjuntar contrato (PDF, foto…)</span>
+                  <input type="file" id="h-file" accept=".pdf,.jpg,.jpeg,.png,.heic" onchange="onFileChange(this,'h-file-text')" />
+                </label>
+                <div class="file-name" id="h-file-name" style="display:none"></div>
+              </div>
+              <div class="contrato-no" id="h-contrato-no">
+                <div class="fg-row">
+                  <div class="fg"><label for="hmatricula">Matrícula del coche</label><input id="hmatricula" name="matricula" type="text" placeholder="Ej: 1234 ABC" /></div>
+                  <div class="fg"><label for="hdni">DNI</label><input id="hdni" name="dni" type="text" placeholder="Ej: 12345678A" /></div>
+                </div>
+                <span style="font-size:.7rem;color:var(--ink-3);">Con estos datos solicitamos el contrato a la financiera por ti.</span>
+              </div>
             </div>
             <div class="form-priv" id="hwrap">
               <input type="checkbox" id="hpriv" name="privacy" required />
@@ -844,13 +881,26 @@
             <div class="fg"><label for="f3">Email</label><input id="f3" name="email" type="email" placeholder="carlos@ejemplo.com" required /></div>
             <div class="fg"><label for="f4">Teléfono</label><input id="f4" name="telefono" type="tel" placeholder="6XX XXX XXX" required /></div>
             <div class="fg">
-              <label for="fcontrato">Contrato de financiación (si lo tienes)</label>
-              <input id="fcontrato" name="contrato_info" type="text" placeholder="Sube una foto o indica que no lo tienes" />
-              <span style="font-size:.7rem;color:var(--ink-3);margin-top:4px;">Si no tienes el contrato, indica la matrícula del coche y tu DNI y lo solicitamos nosotros.</span>
-            </div>
-            <div class="fg-row">
-              <div class="fg"><label for="fmatricula">Matrícula del coche</label><input id="fmatricula" name="matricula" type="text" placeholder="Ej: 1234 ABC" /></div>
-              <div class="fg"><label for="fdni">DNI</label><input id="fdni" name="dni" type="text" placeholder="Ej: 12345678A" /></div>
+              <label>¿Tienes el contrato de financiación?</label>
+              <div class="contrato-toggle">
+                <button type="button" class="toggle-btn" onclick="toggleContrato(this,'f','si')">✓ Sí, lo tengo</button>
+                <button type="button" class="toggle-btn" onclick="toggleContrato(this,'f','no')">✗ No lo tengo</button>
+              </div>
+              <div class="contrato-si" id="f-contrato-si">
+                <label class="file-label">
+                  <span class="file-icon">📎</span>
+                  <span id="f-file-text">Adjuntar contrato (PDF, foto…)</span>
+                  <input type="file" id="f-file" accept=".pdf,.jpg,.jpeg,.png,.heic" onchange="onFileChange(this,'f-file-text')" />
+                </label>
+                <div class="file-name" id="f-file-name" style="display:none"></div>
+              </div>
+              <div class="contrato-no" id="f-contrato-no">
+                <div class="fg-row">
+                  <div class="fg"><label for="fmatricula">Matrícula del coche</label><input id="fmatricula" name="matricula" type="text" placeholder="Ej: 1234 ABC" /></div>
+                  <div class="fg"><label for="fdni">DNI</label><input id="fdni" name="dni" type="text" placeholder="Ej: 12345678A" /></div>
+                </div>
+                <span style="font-size:.7rem;color:var(--ink-3);">Con estos datos solicitamos el contrato a la financiera por ti.</span>
+              </div>
             </div>
             <div class="form-priv" id="fwrap">
               <input type="checkbox" id="fpriv" name="privacy" required />
@@ -1011,14 +1061,17 @@
 
       try {
         const fd = new FormData(form);
+        const prefix = formId === 'hf' ? 'h' : 'f';
+        const tieneContrato = document.getElementById(prefix + '-contrato-si').classList.contains('show');
+        const contratoPath = tieneContrato ? await uploadContrato(prefix) : null;
         await submitLead({
           nombre:        fd.get('nombre'),
           apellidos:     fd.get('apellidos'),
           email:         fd.get('email'),
           telefono:      fd.get('telefono'),
-          contrato_info: fd.get('contrato_info') || null,
-          matricula:     fd.get('matricula') || null,
-          dni:           fd.get('dni') || null,
+          contrato_info: contratoPath,
+          matricula:     tieneContrato ? null : (fd.get('matricula') || null),
+          dni:           tieneContrato ? null : (fd.get('dni') || null),
         });
       } catch {
         btn.disabled = false;
@@ -1049,6 +1102,34 @@
     document.getElementById('scroll-bar').style.display = 'flex';
   }
   document.addEventListener('submit', () => { document.getElementById('scroll-bar').style.display = 'none'; scrollBarShown = true; });
+
+  /* Contrato toggle */
+  function toggleContrato(btn, prefix, val) {
+    btn.closest('.contrato-toggle').querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('sel'));
+    btn.classList.add('sel');
+    document.getElementById(prefix + '-contrato-si').classList.toggle('show', val === 'si');
+    document.getElementById(prefix + '-contrato-no').classList.toggle('show', val === 'no');
+  }
+
+  function onFileChange(input, textId) {
+    const name = input.files[0] ? input.files[0].name : 'Adjuntar contrato (PDF, foto…)';
+    document.getElementById(textId).textContent = name;
+  }
+
+  async function uploadContrato(prefix) {
+    const input = document.getElementById(prefix + '-file');
+    if (!input || !input.files[0]) return null;
+    const file = input.files[0];
+    const ext = file.name.split('.').pop();
+    const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const res = await fetch(`${SB_URL}/storage/v1/object/contratos/${path}`, {
+      method: 'POST',
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`, 'Content-Type': file.type },
+      body: file,
+    });
+    if (!res.ok) return null;
+    return path;
+  }
 
   /* Quiz */
   function quizSelect(val) {
