@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — CocheFinanciado.es</title>
+  <meta name="description" content="Artículos sobre intereses abusivos en contratos de financiación de coches, tus derechos como consumidor y cómo reclamar." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --ink:#0a0a0a; --ink-2:#3a3a3a; --ink-3:#6b6b6b; --line:#e8e8e8; --bg:#ffffff; --bg-2:#f7f7f5; --accent:#1a56ff; --r:12px; }
+    body { font-family:'Sora',sans-serif; color:var(--ink); background:var(--bg); -webkit-font-smoothing:antialiased; }
+    .wrap { max-width:1080px; margin:0 auto; padding:0 28px; }
+    #hdr { position:sticky; top:0; z-index:900; background:rgba(255,255,255,.88); backdrop-filter:blur(16px); border-bottom:1px solid var(--line); }
+    .hdr-i { display:flex; align-items:center; justify-content:space-between; height:60px; }
+    .logo { font-size:1.05rem; font-weight:700; color:var(--ink); text-decoration:none; }
+    .logo b { color:var(--accent); }
+    .hdr-nav { display:flex; gap:24px; align-items:center; }
+    .hdr-nav a { font-size:.82rem; font-weight:600; color:var(--ink-3); text-decoration:none; transition:color .15s; }
+    .hdr-nav a:hover { color:var(--accent); }
+    .hdr-cta { font-size:.8rem; font-weight:700; background:var(--accent); color:#fff; padding:8px 18px; border-radius:8px; text-decoration:none; transition:background .15s; }
+    .hdr-cta:hover { background:#0040e0; }
+
+    .hero { padding:72px 0 56px; border-bottom:1px solid var(--line); }
+    .hero-label { font-size:.72rem; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--ink-3); margin-bottom:14px; }
+    .hero h1 { font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-.03em; margin-bottom:16px; }
+    .hero p { font-size:1rem; color:var(--ink-2); max-width:560px; line-height:1.7; }
+
+    .blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; padding:64px 0 96px; }
+    @media(max-width:820px) { .blog-grid { grid-template-columns:1fr 1fr; } }
+    @media(max-width:540px) { .blog-grid { grid-template-columns:1fr; } }
+
+    .card { background:var(--bg); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; transition:box-shadow .2s,transform .2s; display:flex; flex-direction:column; }
+    .card:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); transform:translateY(-2px); }
+    .card-img { width:100%; aspect-ratio:16/9; background:var(--bg-2); display:flex; align-items:center; justify-content:center; font-size:2.5rem; }
+    .card-body { padding:22px; flex:1; display:flex; flex-direction:column; }
+    .card-tag { font-size:.68rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+    .card-title { font-size:1rem; font-weight:700; line-height:1.4; margin-bottom:10px; color:var(--ink); }
+    .card-excerpt { font-size:.82rem; color:var(--ink-3); line-height:1.7; flex:1; margin-bottom:18px; }
+    .card-meta { font-size:.72rem; color:var(--ink-3); display:flex; justify-content:space-between; align-items:center; }
+    .card-read { font-size:.78rem; font-weight:700; color:var(--accent); text-decoration:none; }
+    .card-read:hover { text-decoration:underline; }
+    a.card-link { text-decoration:none; color:inherit; display:contents; }
+
+    footer { border-top:1px solid var(--line); padding:28px; text-align:center; font-size:.78rem; color:var(--ink-3); }
+    footer a { color:var(--ink-3); text-decoration:none; margin:0 10px; }
+    footer a:hover { color:var(--accent); }
+  </style>
+</head>
+<body>
+<header id="hdr">
+  <div class="wrap">
+    <div class="hdr-i">
+      <a href="/" class="logo">Coche<b>Financiado</b>.es</a>
+      <nav class="hdr-nav">
+        <a href="blog.html">Blog</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="/#hero" class="hdr-cta">Reclamar gratis →</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="hero-label">Blog</p>
+    <h1>Todo sobre la financiación abusiva de coches</h1>
+    <p>Guías, explicaciones jurídicas y consejos para saber si puedes reclamar y cuánto dinero puedes recuperar.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="blog-grid">
+
+    <article class="card">
+      <div class="card-img">🚗</div>
+      <div class="card-body">
+        <div class="card-tag">Guía básica</div>
+        <h2 class="card-title">¿Cómo saber si tu contrato tiene intereses abusivos?</h2>
+        <p class="card-excerpt">Te explicamos qué mirar en tu contrato, qué TAE se considera abusiva según el Tribunal Supremo y cómo identificar cláusulas ilegales en menos de 5 minutos.</p>
+        <div class="card-meta">
+          <span>8 min lectura · Jun 2025</span>
+          <a href="blog/intereses-abusivos-contrato-coche.html" class="card-read">Leer →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-img">⚖️</div>
+      <div class="card-body">
+        <div class="card-tag">Marco legal</div>
+        <h2 class="card-title">La Ley Azcárate: la norma de 1908 que aún protege tu bolsillo</h2>
+        <p class="card-excerpt">Una ley centenaria sigue siendo la principal herramienta jurídica contra los préstamos usurarios. Te contamos qué dice, cómo la aplica el Tribunal Supremo y por qué es tan efectiva.</p>
+        <div class="card-meta">
+          <span>6 min lectura · Jun 2025</span>
+          <a href="blog/ley-azcarate-prestamos-usurarios.html" class="card-read">Leer →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-img">📋</div>
+      <div class="card-body">
+        <div class="card-tag">Seguros</div>
+        <h2 class="card-title">Seguros vinculados obligatorios: qué son y por qué son ilegales</h2>
+        <p class="card-excerpt">Muchas financieras obligan a contratar un seguro de vida o de pago para aprobar el préstamo. Esto es ilegal. Te explicamos cómo detectarlo y qué puedes reclamar.</p>
+        <div class="card-meta">
+          <span>7 min lectura · Jun 2025</span>
+          <a href="blog/seguros-vinculados-obligatorios-ilegales.html" class="card-read">Leer →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-img">💶</div>
+      <div class="card-body">
+        <div class="card-tag">Reclamación</div>
+        <h2 class="card-title">¿Cuánto dinero puedes recuperar? Así se calcula tu indemnización</h2>
+        <p class="card-excerpt">La cantidad que puedes reclamar depende del precio del coche, la TAE aplicada y los años que llevas pagando. Te explicamos la fórmula y te ponemos ejemplos reales.</p>
+        <div class="card-meta">
+          <span>5 min lectura · Jun 2025</span>
+          <a href="blog/cuanto-dinero-puedes-recuperar-financiacion.html" class="card-read">Leer →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="card-img">🏛️</div>
+      <div class="card-body">
+        <div class="card-tag">Proceso</div>
+        <h2 class="card-title">Reclamar sin ir al juzgado: cómo funciona el proceso extrajudicial</h2>
+        <p class="card-excerpt">En la mayoría de los casos no hace falta ir a juicio. Las financieras prefieren llegar a un acuerdo. Te contamos cómo es el proceso paso a paso y cuánto suele tardar.</p>
+        <div class="card-meta">
+          <span>6 min lectura · Jun 2025</span>
+          <a href="blog/reclamar-sin-ir-al-juzgado.html" class="card-read">Leer →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<footer>
+  <a href="/">Inicio</a>
+  <a href="aviso-legal.html">Aviso legal</a>
+  <a href="privacidad.html">Política de privacidad</a>
+  <a href="cookies.html">Política de cookies</a>
+  <a href="contacto.html">Contacto</a>
+  <br/><br/>© 2025 CocheFinanciado.es
+</footer>
+</body>
+</html>
